@@ -1,10 +1,9 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+import Image from "next/image";
 
 export default function Home() {
   return (
-    <div>
-      <h1>편해점</h1>
-    </div>
-  )
+    <>
+      <div className="font-bold text-[100px]">편해점</div>
+    </>
+  );
 }
