@@ -7,10 +7,11 @@ import { menuItems } from '@/data/menuData'
 
 // 클라이언트 사이드에서만 렌더링되도록 dynamic import 사용
 const Roulette = dynamic(() => import('@/components/Roulette'), {
-  ssr: false
+  ssr: false,
+  loading: () => <p>Loading...</p>
 })
 
-export default function RoulettePage() {
+const RoulettePage = () => {
   const [selectedMenu, setSelectedMenu] = useState(null)
 
   const handleRouletteComplete = (item) => {
@@ -63,4 +64,6 @@ export default function RoulettePage() {
       </div>
     </div>
   )
-} 
+}
+
+export default RoulettePage 
