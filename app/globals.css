@@ -73,9 +73,7 @@ body {
 /* Header 스타일 */
 .header {
   width: 100%;
-  padding: 1rem 0;
   background-color: white;
-  border-bottom: 1px solid var(--gray-light);
 }
 
 .header_container {
@@ -85,6 +83,7 @@ body {
   max-width: var(--max-width);
   margin: 0 auto;
   padding: 0 1rem;
+  height: 4em;
 }
 
 .header_content {
@@ -95,7 +94,7 @@ body {
 }
 
 .header_title {
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: 800;
   text-decoration: none;
   background: linear-gradient(
@@ -127,11 +126,30 @@ body {
   padding: 0.5rem 1.5rem;
   border-radius: 20px;
   transition: all 0.2s ease;
+  position: relative;
 }
 
 .menu_link:hover {
   background-color: var(--gray-light);
   color: var(--primary-color);
+}
+
+.menu_link_active {
+  color: var(--primary-color);
+  background-color: var(--gray-light);
+  font-weight: 600;
+}
+
+.menu_link_active::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30%;
+  height: 2px;
+  background-color: var(--primary-color);
+  border-radius: 2px;
 }
 
 /* Footer 스타일 */
