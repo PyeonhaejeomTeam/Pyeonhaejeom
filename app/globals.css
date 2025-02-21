@@ -136,39 +136,39 @@ body {
 
 /* Footer 스타일 */
 .footer {
-  background-color: white;
-  border-top: 1px solid var(--gray-light);
-  padding: 2.5rem 0;
   margin-top: auto;
+  padding: 2rem 0;
+  background-color: var(--gray-light);
+  border-top: 1px solid #eee;
 }
 
 .footer_content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  gap: 1.2rem;
-}
-
-.footer_text {
-  color: var(--gray-medium);
-  font-size: 0.95rem;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1rem;
+  text-align: center;
 }
 
 .footer_links {
   display: flex;
+  justify-content: center;
   gap: 2rem;
+  margin-bottom: 1rem;
 }
 
 .footer_link {
   color: var(--text-color);
   text-decoration: none;
-  font-weight: 500;
-  transition: color 0.2s ease;
+  font-size: 0.9rem;
 }
 
 .footer_link:hover {
   color: var(--primary-color);
+}
+
+.footer_copyright {
+  color: var(--gray-medium);
+  font-size: 0.8rem;
 }
 
 /* 홈페이지 스타일 */
@@ -700,4 +700,35 @@ body {
 
 .social-buttons > button:hover {
   transform: scale(1.1);
+}
+
+/* 개인정보 처리방침 페이지 스타일 */
+.privacy_container {
+  max-width: var(--max-width);
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.privacy_section {
+  margin: 2rem 0;
+}
+
+.privacy_section h2 {
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+}
+
+.privacy_section p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.privacy_section ul {
+  list-style: disc;
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.privacy_section li {
+  margin: 0.5rem 0;
 }
