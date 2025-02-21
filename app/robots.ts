@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://pyeonhaejeom.vercel.app/sitemap.xml", // 실제 도메인으로 변경해주세요
+    sitemap: "https://pyeonhaejeom.netlify.app/sitemap.xml", // 실제 도메인으로 변경해주세요
   };
 }

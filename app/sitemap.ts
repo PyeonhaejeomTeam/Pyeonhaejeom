@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://pyeonhaejeom.vercel.app"; // 실제 도메인으로 변경해주세요
+  const baseUrl = "https://pyeonhaejeom.netlify.app/"; // 실제 도메인으로 변경해주세요
 
   // 정적 페이지 목록
   const staticPages = ["", "/game", "/roulette", "/combination"].map(
