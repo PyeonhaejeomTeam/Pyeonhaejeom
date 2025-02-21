@@ -9,6 +9,9 @@ export default function Menu() {
       <Link href="/roulette" className="menu_link">
         룰렛
       </Link>
+      <Link href="/community" className="menu-item">
+        커뮤니티
+      </Link>
     </nav>
   );
 }

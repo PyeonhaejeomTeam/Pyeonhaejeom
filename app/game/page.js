@@ -1,77 +1,29 @@
-'use client'
+"use client";
 
-import { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
+import { useState, useEffect } from "react";
+import GameContent from "@/components/GameContent";
 
 export default function Game() {
-  const [currentQuestion, setCurrentQuestion] = useState(0)
-  const [questions, setQuestions] = useState([])
-  const [answers, setAnswers] = useState([])
-  const [loading, setLoading] = useState(true)
-  const router = useRouter()
+  const [questions, setQuestions] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchQuestions()
-  }, [])
-
-  const fetchQuestions = async () => {
-    try {
-      const response = await fetch('/api/questions')
-      const data = await response.json()
-      setQuestions(data.questions)
-      setLoading(false)
-    } catch (error) {
-      console.error('질문을 불러오는데 실패했습니다:', error)
-    }
-  }
-
-  const handleAnswer = async (answer) => {
-    const newAnswers = [...answers, answer]
-    
-    if (currentQuestion === questions.length - 1) {
+    async function fetchQuestions() {
       try {
-        const response = await fetch('/api/questions', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ answers: newAnswers }),
-        })
-        const data = await response.json()
-        router.push(`/result?type=${data.resultType}`)
+        const res = await fetch("/api/questions");
+        const data = await res.json();
+        setQuestions(data.questions || []);
       } catch (error) {
-        console.error('답변 처리에 실패했습니다:', error)
+        console.error("질문을 불러오는데 실패했습니다:", error);
+      } finally {
+        setLoading(false);
       }
-    } else {
-      setAnswers(newAnswers)
-      setCurrentQuestion(currentQuestion + 1)
     }
-  }
 
-  if (loading) return <div className="loading">질문을 불러오는 중...</div>
+    fetchQuestions();
+  }, []);
 
-  return (
-    <div className="game_container">
-      <div className="question_header">
-        <span className="question_counter">
-          {currentQuestion + 1} / {questions.length}
-        </span>
-        <h2 className="question_title">
-          {questions[currentQuestion].question}
-        </h2>
-      </div>
+  if (loading) return <div className="loading">질문을 불러오는 중...</div>;
 
-      <div className="choices_container">
-        {questions[currentQuestion].choices.map((choice, index) => (
-          <button
-            key={index}
-            onClick={() => handleAnswer(choice.value)}
-            className="choice_button"
-          >
-            {choice.text}
-          </button>
-        ))}
-      </div>
-    </div>
-  )
-} 
+  return <GameContent questions={questions} />;
+}

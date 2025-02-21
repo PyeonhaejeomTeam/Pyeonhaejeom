@@ -283,6 +283,7 @@ body {
   -webkit-background-clip: text;
   color: transparent;
   font-weight: 800;
+  text-align: center;
 }
 
 .result_card {
@@ -359,8 +360,17 @@ body {
   font-weight: 600;
   transition: all 0.3s ease;
   text-decoration: none;
-  display: inline-block;
+  width: auto;
+  display: block;
+  margin: 0 auto;
   box-shadow: var(--shadow-md);
+}
+
+.button_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 .button:hover {
@@ -568,6 +578,7 @@ body {
   margin: 0 auto;
   padding: 3rem 1rem;
   text-align: center;
+  display: flax;
 }
 
 .roulette_header {
@@ -585,6 +596,7 @@ body {
   );
   -webkit-background-clip: text;
   color: transparent;
+  text-align: center;
 }
 
 .roulette_description {
@@ -666,4 +678,26 @@ body {
 .header_link:hover {
   background-color: var(--gray-light);
   color: var(--primary-color);
+}
+
+/* ShareButtons 스타일 */
+.share-container {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.social-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.social-buttons > button {
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.social-buttons > button:hover {
+  transform: scale(1.1);
 }

@@ -2,21 +2,26 @@
 
 import { useState } from "react";
 
-export default function Roulette({ items, onComplete }) {
-  const [rotating, setRotating] = useState(false);
+export default function Roulette({ items = [], onComplete }) {
   const [degree, setDegree] = useState(0);
+  const [isSpinning, setIsSpinning] = useState(false);
+
+  // items가 배열이 아니거나 비어있으면 early return
+  if (!Array.isArray(items) || items.length === 0) {
+    return <div>메뉴를 불러오는 중...</div>;
+  }
 
   const startRotation = () => {
-    if (rotating) return;
+    if (isSpinning) return;
 
-    setRotating(true);
+    setIsSpinning(true);
     const randomDegree = Math.floor(Math.random() * 360) + 1800; // 최소 5바퀴
     setDegree((prevDegree) => prevDegree + randomDegree);
 
     // 결과 계산
     setTimeout(() => {
       const selected = items[Math.floor(Math.random() * items.length)];
-      setRotating(false);
+      setIsSpinning(false);
       if (onComplete) onComplete(selected);
     }, 3000);
   };
@@ -37,7 +42,7 @@ export default function Roulette({ items, onComplete }) {
               clipPath: `polygon(0 0, 100% 0, 100% 100%)`,
             }}
           >
-            <span className="roulette_text">{item.text}</span>
+            <span className="roulette_text">{item.name}</span>
           </div>
         ))}
       </div>
@@ -45,9 +50,9 @@ export default function Roulette({ items, onComplete }) {
       <button
         className="roulette_button"
         onClick={startRotation}
-        disabled={rotating}
+        disabled={isSpinning}
       >
-        {rotating ? "돌아가는 중..." : "룰렛 돌리기"}
+        {isSpinning ? "돌아가는 중..." : "룰렛 돌리기"}
       </button>
     </div>
   );

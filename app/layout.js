@@ -31,7 +31,7 @@ export default function RootLayout({ children }) {
       <body>
         <Header />
         <Menu />
-        <main className="main" style={{ minHeight: '100vh', height: 'auto' }}>
+        <main className="main" style={{ height: "auto" }}>
           <div className="container">{children}</div>
         </main>
         <Footer />

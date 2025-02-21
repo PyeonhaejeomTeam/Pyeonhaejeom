@@ -1,12 +1,16 @@
 import { personalities } from "@/data/personalities";
 
 export async function GET() {
-  try {
-    return Response.json({ personalities });
-  } catch (error) {
-    return Response.json(
-      { error: "성향 데이터를 불러오는데 실패했습니다." },
-      { status: 500 }
-    );
-  }
+  const personalities = {
+    comfort: {
+      type: "편안함 추구형",
+      description: "안정적이고 검증된 맛을 선호하는 성향"
+    },
+    adventure: {
+      type: "모험 추구형",
+      description: "새롭고 독특한 맛을 탐험하기 좋아하는 성향"
+    }
+  };
+
+  return Response.json({ personalities });
 } 
