@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-const Roulette = ({ items, onComplete }) => {
+export default function Roulette({ items, onComplete }) {
   const [rotating, setRotating] = useState(false);
   const [degree, setDegree] = useState(0);
 
@@ -22,28 +22,28 @@ const Roulette = ({ items, onComplete }) => {
   };
 
   return (
-    <div className="roulette-container">
+    <div className="roulette_container">
       <div
-        className="roulette-wheel"
+        className="roulette_wheel"
         style={{ transform: `rotate(${degree}deg)` }}
       >
         {items.map((item, index) => (
           <div
             key={index}
-            className="roulette-item"
+            className="roulette_item"
             style={{
               transform: `rotate(${(360 / items.length) * index}deg)`,
               backgroundColor: `hsl(${(360 / items.length) * index}, 70%, 90%)`,
               clipPath: `polygon(0 0, 100% 0, 100% 100%)`,
             }}
           >
-            <span className="roulette-text">{item.text}</span>
+            <span className="roulette_text">{item.text}</span>
           </div>
         ))}
       </div>
-      <div className="roulette-center"></div>
+      <div className="roulette_center"></div>
       <button
-        className="roulette-button"
+        className="roulette_button"
         onClick={startRotation}
         disabled={rotating}
       >
@@ -51,6 +51,4 @@ const Roulette = ({ items, onComplete }) => {
       </button>
     </div>
   );
-};
-
-export default Roulette;
+}

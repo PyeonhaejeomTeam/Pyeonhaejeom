@@ -1,9 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import { menuItems } from "@/data/menuData";
 
 // 클라이언트 사이드에서만 렌더링되도록 dynamic import 사용
 const Roulette = dynamic(() => import("@/components/Roulette"), {
@@ -11,12 +10,31 @@ const Roulette = dynamic(() => import("@/components/Roulette"), {
   loading: () => <p>Loading...</p>,
 });
 
-const RoulettePage = () => {
+export default function RoulettePage() {
+  const [items, setItems] = useState([]);
   const [selectedMenu, setSelectedMenu] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchRouletteItems = async () => {
+      try {
+        const response = await fetch('/api/roulette');
+        const data = await response.json();
+        setItems(data.items);
+        setLoading(false);
+      } catch (error) {
+        console.error('룰렛 아이템을 불러오는데 실패했습니다:', error);
+      }
+    };
+
+    fetchRouletteItems();
+  }, []);
 
   const handleRouletteComplete = (item) => {
     setSelectedMenu(item);
   };
+
+  if (loading) return <div className="loading">메뉴를 불러오는 중...</div>;
 
   return (
     <div className="roulette_page">
@@ -26,7 +44,7 @@ const RoulettePage = () => {
       </div>
 
       <div className="roulette_main">
-        <Roulette items={menuItems} onComplete={handleRouletteComplete} />
+        <Roulette items={items} onComplete={handleRouletteComplete} />
 
         {selectedMenu && (
           <div className="selected_menu fade_in">
@@ -55,6 +73,4 @@ const RoulettePage = () => {
       </div>
     </div>
   );
-};
-
-export default RoulettePage;
+}
