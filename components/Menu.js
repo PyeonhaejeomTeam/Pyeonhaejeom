@@ -4,7 +4,7 @@ export default function Menu() {
   return (
     <nav className="menu_container">
       <Link href="/game" className="menu_link">
-        테스트
+        심리 테스트
       </Link>
       <Link href="/roulette" className="menu_link">
         룰렛
