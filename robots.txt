@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://pyeonhaejeom.netlify.app/sitemap.xml
