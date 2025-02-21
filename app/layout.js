@@ -20,11 +20,13 @@ export default function RootLayout({ children }) {
         {/* 구글 검색 최적화 */}
         <meta
           name="google-site-verification"
-          content="Okoy-sXR8vUhBrMr00fBAKBlaslB3wSRQT8EpBQS-T4"
+          content="EuDnGqJMQiOsf6gBEO84sXNF2Ex31NuulhpuwpP4mFE"
         />
         {/* 네이버 검색 최적화 */}
-        <meta name="naver-site-verification" content="950dd5cfc7353572df2ece178ad9bf8fbecbaf41" />
-
+        <meta
+          name="naver-site-verification"
+          content="950dd5cfc7353572df2ece178ad9bf8fbecbaf41"
+        />
       </head>
       <body>
         <Header />
