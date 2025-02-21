@@ -1,19 +1,93 @@
 export const questions = [
   {
     id: 1,
-    question: "배가 고픈 당신, 편의점에서 고르는 음식은?",
+    question: "배가 고픈 당신, 편의점에서 가장 먼저 보는 곳은?",
     choices: [
       {
         id: "A",
-        text: "따뜻한 도시락이나 라면",
-        type: "comfort",
+        text: "도시락 코너",
+        type: "meal_lover",
+        tags: ["healthy", "filling"]
       },
       {
         id: "B",
-        text: "샌드위치나 삼각김밥",
-        type: "practical",
+        text: "과자 코너",
+        type: "snack_lover",
+        tags: ["sweet", "quick"]
       },
-    ],
+      {
+        id: "C",
+        text: "음료 냉장고",
+        type: "drink_lover",
+        tags: ["refresh", "light"]
+      },
+      {
+        id: "D",
+        text: "라면 코너",
+        type: "ramen_lover",
+        tags: ["hot", "comfort"]
+      }
+    ]
+  },
+  {
+    id: 2,
+    question: "오늘 편의점에서 음식을 고르는 당신의 상황은?",
+    choices: [
+      {
+        id: "A",
+        text: "든든하게 배를 채우고 싶어요",
+        type: "meal_lover",
+        tags: ["filling", "value"]
+      },
+      {
+        id: "B",
+        text: "달달한 게 당기네요",
+        type: "snack_lover",
+        tags: ["sweet", "mood"]
+      },
+      {
+        id: "C",
+        text: "가볍게 먹고 싶어요",
+        type: "drink_lover",
+        tags: ["light", "healthy"]
+      },
+      {
+        id: "D",
+        text: "따뜻한 게 먹고 싶어요",
+        type: "ramen_lover",
+        tags: ["hot", "comfort"]
+      }
+    ]
+  },
+  {
+    id: 3,
+    question: "편의점 음식을 고를 때 가장 중요하게 생각하는 것은?",
+    choices: [
+      {
+        id: "A",
+        text: "가성비가 좋아야죠",
+        type: "value_seeker",
+        tags: ["value", "filling"]
+      },
+      {
+        id: "B",
+        text: "맛있으면 가격은 상관없어요",
+        type: "gourmet",
+        tags: ["taste", "quality"]
+      },
+      {
+        id: "C",
+        text: "칼로리를 꼭 체크해요",
+        type: "health_conscious",
+        tags: ["healthy", "light"]
+      },
+      {
+        id: "D",
+        text: "양이 많아야 해요",
+        type: "big_portion",
+        tags: ["filling", "value"]
+      }
+    ]
   },
   {
     question: "편의점에서 야식을 고를 때 당신은?",
