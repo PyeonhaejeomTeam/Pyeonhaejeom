@@ -18,6 +18,9 @@
   --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
     "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
     "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
+  --gradient-bg: linear-gradient(135deg, #f5f7fa 0%, #e4e9f2 100%);
+  --card-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  --card-border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -50,6 +53,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background: var(--gradient-bg);
 }
 
 /* Main 레이아웃 수정 */
@@ -287,7 +291,8 @@ body {
 .result_container {
   max-width: 900px;
   margin: 0 auto;
-  padding: 4rem 1rem;
+  padding: 3rem 1rem;
+  position: relative;
 }
 
 .result_title {
@@ -305,18 +310,69 @@ body {
 }
 
 .result_card {
-  background-color: white;
+  background: rgba(255, 255, 255, 0.95);
   padding: 3rem;
   border-radius: var(--border-radius);
   margin-bottom: 3rem;
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--card-shadow);
+  border: var(--card-border);
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+}
+
+.result_card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(
+    to right,
+    var(--primary-color),
+    var(--secondary-color)
+  );
 }
 
 .result_description {
   font-size: 1.2rem;
   line-height: 1.8;
-  margin-bottom: 3rem;
+  margin: 2rem auto 3rem;
   color: var(--text-color);
+  text-align: center;
+  white-space: pre-line;
+  word-break: keep-all;
+  padding: 2rem 3rem;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: var(--border-radius);
+  box-shadow: var(--card-shadow);
+  border: var(--card-border);
+  backdrop-filter: blur(5px);
+  max-width: 800px;
+  position: relative;
+}
+
+.result_description::before {
+  content: '"';
+  position: absolute;
+  top: -0.5rem;
+  left: 2rem;
+  font-size: 4rem;
+  color: var(--primary-color);
+  opacity: 0.2;
+  font-family: serif;
+}
+
+.result_description::after {
+  content: '"';
+  position: absolute;
+  bottom: -2rem;
+  right: 2rem;
+  font-size: 4rem;
+  color: var(--primary-color);
+  opacity: 0.2;
+  font-family: serif;
 }
 
 .recommendations_title {
@@ -324,6 +380,7 @@ body {
   margin-bottom: 2rem;
   font-weight: 700;
   color: var(--text-color);
+  text-align: center;
 }
 
 .recommendations_grid {
@@ -333,14 +390,19 @@ body {
 }
 
 .recommendation_card {
+  background: rgba(255, 255, 255, 0.9);
   padding: 2rem;
-  background-color: var(--gray-light);
   border-radius: var(--border-radius);
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
+  text-align: center;
+  border: var(--card-border);
+  box-shadow: var(--card-shadow);
+  backdrop-filter: blur(5px);
 }
 
 .recommendation_card:hover {
   transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
 }
 
 .recommendation_title {
@@ -366,7 +428,7 @@ body {
 .button {
   padding: 1rem 2.5rem;
   background: linear-gradient(
-    to right,
+    45deg,
     var(--primary-color),
     var(--primary-light)
   );
@@ -379,21 +441,34 @@ body {
   transition: all 0.3s ease;
   text-decoration: none;
   width: auto;
-  display: block;
-  margin: 0 auto;
-  box-shadow: var(--shadow-md);
-}
-
-.button_container {
-  display: flex;
+  display: inline-flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  text-align: center;
+  margin: 0 auto;
+  box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
+  min-width: 200px;
+  position: relative;
+  overflow: hidden;
 }
 
-.button:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
+.button::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0)
+  );
+  transition: transform 0.3s ease;
+}
+
+.button:hover::after {
+  transform: translateX(100%);
 }
 
 .button:active {
@@ -415,7 +490,7 @@ body {
   }
 
   .result_card {
-    padding: 2rem;
+    padding: 2rem 1.5rem;
   }
 
   .recommendations_grid {
@@ -439,6 +514,27 @@ body {
   .menu_link {
     padding: 0.5rem 1rem;
     font-size: 0.9rem;
+  }
+
+  .result_description {
+    font-size: 1.1rem;
+    padding: 1.5rem 2rem;
+    margin: 1.5rem auto 2.5rem;
+  }
+
+  .result_description::before {
+    font-size: 3rem;
+    left: 1rem;
+  }
+
+  .result_description::after {
+    font-size: 3rem;
+    right: 1rem;
+    bottom: -1.5rem;
+  }
+
+  .recommendation_card {
+    padding: 1.5rem;
   }
 }
 
@@ -606,7 +702,7 @@ body {
 .roulette_title {
   font-size: clamp(2rem, 6vw, 3rem);
   font-weight: 800;
-  margin-bottom: 1rem;
+  padding: 1rem;
   background: linear-gradient(
     to right,
     var(--primary-color),
@@ -749,4 +845,39 @@ body {
 
 .privacy_section li {
   margin: 0.5rem 0;
+}
+
+/* 버튼 그룹 스타일 */
+.button_group {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.button_group .button {
+  margin: 0;
+  flex: 0 1 auto;
+  min-width: 180px;
+  max-width: none;
+}
+
+/* 반응형 스타일 */
+@media (max-width: 768px) {
+  .button_group {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .button_group .button {
+    width: 100%;
+    max-width: 280px;
+  }
+}
+
+/* 공유 섹션 스타일 추가 */
+.share_section {
+  margin-top: 3rem;
+  text-align: center;
 }

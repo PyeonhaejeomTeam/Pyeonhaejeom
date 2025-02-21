@@ -37,9 +37,14 @@ export default function ResultContent({ result, personality, menuItems }) {
           {showRoulette ? (
             <Roulette items={menuItems} onComplete={handleRouletteComplete} />
           ) : (
-            <button className="button" onClick={() => setShowRoulette(true)}>
-              랜덤 메뉴 뽑기
-            </button>
+            <div className="button_group">
+              <button className="button" onClick={() => setShowRoulette(true)}>
+                랜덤 메뉴 뽑기
+              </button>
+              <Link href="/" className="button">
+                다시 테스트하기
+              </Link>
+            </div>
           )}
         </div>
       </div>
@@ -47,10 +52,7 @@ export default function ResultContent({ result, personality, menuItems }) {
       <div className="share_section fade_in">
         <ShareButtons testResult={result} />
       </div>
-
-      <Link href="/" className="button">
-        다시 테스트하기
-      </Link>
+   
     </div>
   );
 }
