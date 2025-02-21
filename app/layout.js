@@ -105,7 +105,7 @@ export default function RootLayout({ children }) {
         />
 
         {/* Favicon */}
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/app/assets/image/sky.ico" />
         <link rel="manifest" href="/manifest.json" />
       </head>
       <body>
