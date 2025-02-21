@@ -1,4 +1,4 @@
-import { questions } from "@/data/questions";
+import { questions } from "@/app/assets/data/questions";
 
 export async function GET() {
   const questions = [
@@ -6,23 +6,23 @@ export async function GET() {
       text: "배가 고플 때 당신은?",
       choices: [
         { text: "익숙한 메뉴로 안전하게", value: "comfort" },
-        { text: "새로운 메뉴에 도전!", value: "adventure" }
-      ]
+        { text: "새로운 메뉴에 도전!", value: "adventure" },
+      ],
     },
     {
       text: "편의점에서 고민할 때",
       choices: [
         { text: "항상 먹던 메뉴 선택", value: "comfort" },
-        { text: "새로 나온 메뉴 시도", value: "adventure" }
-      ]
+        { text: "새로 나온 메뉴 시도", value: "adventure" },
+      ],
     },
     {
       text: "음식 조합을 고를 때",
       choices: [
         { text: "검증된 조합만 선택", value: "comfort" },
-        { text: "이색적인 조합 시도", value: "adventure" }
-      ]
-    }
+        { text: "이색적인 조합 시도", value: "adventure" },
+      ],
+    },
   ];
 
   return Response.json({ questions });
