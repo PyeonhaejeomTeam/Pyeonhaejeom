@@ -16,6 +16,16 @@ export default function RootLayout({ children }) {
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
         />
+        {/* 구글 검색 최적화 */}
+        <meta
+          name="google-site-verification"
+          content="Okoy-sXR8vUhBrMr00fBAKBlaslB3wSRQT8EpBQS-T4"
+        />
+        {/* 네이버 검색 최적화 */}
+        <meta
+          name="naver-site-verification"
+          content="30814fa1628722fa09ba1646d1d900b3f399d56e"
+        />
       </head>
       <body>
         <Header />
