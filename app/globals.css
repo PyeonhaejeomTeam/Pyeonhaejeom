@@ -3,13 +3,13 @@
 @tailwind utilities;
 
 :root {
-  --primary-color: #7C3AED;
-  --primary-light: #9F67FF;
-  --secondary-color: #10B981;
-  --background-color: #F9FAFB;
-  --text-color: #1F2937;
-  --gray-light: #F3F4F6;
-  --gray-medium: #9CA3AF;
+  --primary-color: #7c3aed;
+  --primary-light: #9f67ff;
+  --secondary-color: #10b981;
+  --background-color: #f9fafb;
+  --text-color: #1f2937;
+  --gray-light: #f3f4f6;
+  --gray-medium: #9ca3af;
   --max-width: 1200px;
   --border-radius: 16px;
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
@@ -61,28 +61,66 @@ body {
 
 /* Header 스타일 */
 .header {
-  position: sticky;
-  top: 0;
-  background-color: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(12px);
-  box-shadow: var(--shadow-sm);
-  z-index: 1000;
+  width: 100%;
+  padding: 1rem 0;
+  background-color: white;
   border-bottom: 1px solid var(--gray-light);
 }
 
-.header-container {
+.header_container {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  height: 70px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
-.header-title {
-  font-size: clamp(1.3rem, 4vw, 1.6rem);
-  font-weight: 700;
-  background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+.header_content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header_title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  text-decoration: none;
+  background: linear-gradient(
+    to right,
+    var(--primary-color),
+    var(--secondary-color)
+  );
   -webkit-background-clip: text;
   color: transparent;
+  padding: 0.5rem;
+}
+
+/* Menu 스타일 */
+.menu_container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  padding: 0.5rem;
+  background-color: white;
+  border-bottom: 1px solid var(--gray-light);
+}
+
+.menu_link {
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 1.5rem;
+  border-radius: 20px;
+  transition: all 0.2s ease;
+}
+
+.menu_link:hover {
+  background-color: var(--gray-light);
+  color: var(--primary-color);
 }
 
 /* Footer 스타일 */
@@ -93,7 +131,7 @@ body {
   margin-top: auto;
 }
 
-.footer-content {
+.footer_content {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -101,31 +139,35 @@ body {
   gap: 1.2rem;
 }
 
-.footer-text {
+.footer_text {
   color: var(--gray-medium);
   font-size: 0.95rem;
 }
 
-.footer-links {
+.footer_links {
   display: flex;
   gap: 2rem;
 }
 
-.footer-link {
+.footer_link {
   color: var(--text-color);
   text-decoration: none;
   font-weight: 500;
   transition: color 0.2s ease;
 }
 
-.footer-link:hover {
+.footer_link:hover {
   color: var(--primary-color);
 }
 
 /* Main 레이아웃 */
 .main {
   flex: 1;
-  padding-bottom: 2rem;
+  padding: 2rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 140px);
 }
 
 /* 홈페이지 스타일 */
@@ -134,13 +176,22 @@ body {
   padding: 6rem 0;
   max-width: 800px;
   margin: 0 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .home-title {
   font-size: clamp(2.5rem, 8vw, 4rem);
   font-weight: 800;
   margin-bottom: 1.5rem;
-  background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+  background: linear-gradient(
+    to right,
+    var(--primary-color),
+    var(--secondary-color)
+  );
   -webkit-background-clip: text;
   color: transparent;
 }
@@ -149,6 +200,7 @@ body {
   font-size: clamp(1.1rem, 4vw, 1.4rem);
   color: var(--gray-medium);
   margin-bottom: 3.5rem;
+
   line-height: 1.5;
 }
 
@@ -222,7 +274,11 @@ body {
 .result-title {
   font-size: clamp(2rem, 6vw, 3rem);
   margin-bottom: 2rem;
-  background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+  background: linear-gradient(
+    to right,
+    var(--primary-color),
+    var(--secondary-color)
+  );
   -webkit-background-clip: text;
   color: transparent;
   font-weight: 800;
@@ -289,7 +345,11 @@ body {
 /* 버튼 스타일 */
 .button {
   padding: 1rem 2.5rem;
-  background: linear-gradient(to right, var(--primary-color), var(--primary-light));
+  background: linear-gradient(
+    to right,
+    var(--primary-color),
+    var(--primary-light)
+  );
   color: white;
   border: none;
   border-radius: 30px;
@@ -316,7 +376,7 @@ body {
   .container {
     padding: 0 2rem;
   }
-  
+
   .result-card {
     padding: 4rem;
   }
@@ -326,13 +386,41 @@ body {
   html {
     font-size: 14px;
   }
-  
+
   .result-card {
     padding: 2rem;
   }
-  
+
   .recommendations-grid {
     grid-template-columns: 1fr;
+  }
+
+  .main {
+    padding: 1rem 0;
+    min-height: calc(100vh - 120px);
+  }
+
+  .container {
+    padding: 0 1rem;
+  }
+
+  .header_container {
+    padding: 0 1rem;
+    gap: 1rem;
+  }
+
+  .header_title {
+    font-size: 2rem;
+  }
+
+  .menu_container {
+    gap: 1rem;
+    padding: 0.5rem 0;
+  }
+
+  .menu_link {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
   }
 }
 
@@ -357,14 +445,14 @@ body {
 }
 
 /* 룰렛 스타일 수정 */
-.roulette-container {
+.roulette_container {
   position: relative;
   width: 300px;
   height: 300px;
   margin: 2rem auto;
 }
 
-.roulette-wheel {
+.roulette_wheel {
   position: relative;
   width: 100%;
   height: 100%;
@@ -375,7 +463,7 @@ body {
   overflow: hidden;
 }
 
-.roulette-item {
+.roulette_item {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -386,7 +474,7 @@ body {
   padding-top: 20px;
 }
 
-.roulette-text {
+.roulette_text {
   font-size: 0.8rem;
   font-weight: 600;
   color: var(--text-color);
@@ -395,7 +483,7 @@ body {
   white-space: nowrap;
 }
 
-.roulette-center {
+.roulette_center {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -408,7 +496,7 @@ body {
   z-index: 5;
 }
 
-.roulette-button {
+.roulette_button {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -426,31 +514,35 @@ body {
   white-space: nowrap;
 }
 
-.roulette-button:hover:not(:disabled) {
+.roulette_button:hover:not(:disabled) {
   background: var(--primary-light);
   transform: translate(-50%, -50%) scale(1.05);
 }
 
-.roulette-button:disabled {
+.roulette_button:disabled {
   background: var(--gray-medium);
   cursor: not-allowed;
 }
 
 /* 룰렛 반응형 스타일 */
 @media (max-width: 768px) {
-  .roulette-container {
+  .roulette_container {
     width: 250px;
     height: 250px;
   }
 
-  .roulette-text {
+  .roulette_text {
     font-size: 0.7rem;
   }
 }
 
 /* 애니메이션 효과 */
 @keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
     transform: translateY(0);
   }
   40% {
@@ -481,32 +573,36 @@ body {
 }
 
 /* 룰렛 페이지 스타일 */
-.roulette-page {
+.roulette_page {
   max-width: 800px;
   margin: 0 auto;
   padding: 3rem 1rem;
   text-align: center;
 }
 
-.roulette-header {
+.roulette_header {
   margin-bottom: 3rem;
 }
 
-.roulette-title {
+.roulette_title {
   font-size: clamp(2rem, 6vw, 3rem);
   font-weight: 800;
   margin-bottom: 1rem;
-  background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+  background: linear-gradient(
+    to right,
+    var(--primary-color),
+    var(--secondary-color)
+  );
   -webkit-background-clip: text;
   color: transparent;
 }
 
-.roulette-description {
+.roulette_description {
   font-size: clamp(1.1rem, 4vw, 1.3rem);
   color: var(--gray-medium);
 }
 
-.roulette-main {
+.roulette_main {
   background-color: white;
   padding: 3rem;
   border-radius: var(--border-radius);
@@ -514,20 +610,20 @@ body {
   margin-bottom: 2rem;
 }
 
-.selected-menu {
+.selected_menu {
   margin-top: 3rem;
   padding-top: 3rem;
   border-top: 2px dashed var(--gray-light);
 }
 
-.selected-menu-title {
+.selected_menu_title {
   font-size: 1.5rem;
   font-weight: 700;
   margin-bottom: 1.5rem;
   color: var(--primary-color);
 }
 
-.selected-menu-card {
+.selected_menu_card {
   background-color: var(--gray-light);
   padding: 2rem;
   border-radius: var(--border-radius);
@@ -535,49 +631,49 @@ body {
   margin: 0 auto;
 }
 
-.selected-menu-name {
+.selected_menu_name {
   font-size: 1.3rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
   color: var(--text-color);
 }
 
-.selected-menu-description {
+.selected_menu_description {
   color: var(--gray-medium);
   line-height: 1.6;
 }
 
-.roulette-actions {
+.roulette_actions {
   margin-top: 2rem;
 }
 
-.button-secondary {
+.button_secondary {
   background: white;
   color: var(--primary-color);
   border: 2px solid var(--primary-color);
 }
 
-.button-secondary:hover {
+.button_secondary:hover {
   background: var(--primary-color);
   color: white;
 }
 
 /* Header 링크 스타일 추가 */
-.header-links {
+.header_links {
   display: flex;
   gap: 1.5rem;
 }
 
-.header-link {
+.header_link {
   color: var(--text-color);
   text-decoration: none;
   font-weight: 500;
-  transition: color 0.2s ease;
   padding: 0.5rem 1rem;
   border-radius: 20px;
+  transition: all 0.2s ease;
 }
 
-.header-link:hover {
-  color: var(--primary-color);
+.header_link:hover {
   background-color: var(--gray-light);
+  color: var(--primary-color);
 }

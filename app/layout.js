@@ -1,6 +1,7 @@
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Menu from "@/components/Menu";
 
 export const metadata = {
   title: "편해점 - 음식 밸런스 게임",
@@ -29,6 +30,8 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         <Header />
+        <Menu />
+
         <main className="main">
           <div className="container">{children}</div>
         </main>
