@@ -15,6 +15,7 @@ import {
   arrayUnion,
   onSnapshot,
   getDoc,
+  deleteDoc,
 } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
@@ -38,6 +39,8 @@ const ConvenienceFoodCommunity = () => {
     }
     return new Set();
   });
+  const [editingPost, setEditingPost] = useState(null);
+  const [editingComment, setEditingComment] = useState(null);
 
   // Firebase에서 게시글 불러오기
   useEffect(() => {
@@ -91,24 +94,42 @@ const ConvenienceFoodCommunity = () => {
 
   // 좋아요 처리
   const handleLike = async (postId) => {
-    if (likedPosts.has(postId)) return;
-
     try {
       const postRef = doc(db, "posts", postId);
-      await updateDoc(postRef, {
-        likes: increment(1),
-      });
 
-      const newLikedPosts = new Set(likedPosts);
-      newLikedPosts.add(postId);
-      setLikedPosts(newLikedPosts);
-      localStorage.setItem("likedPosts", JSON.stringify([...newLikedPosts]));
+      if (likedPosts.has(postId)) {
+        // 좋아요 취소
+        await updateDoc(postRef, {
+          likes: increment(-1),
+        });
 
-      setPosts(
-        posts.map((post) =>
-          post.id === postId ? { ...post, likes: post.likes + 1 } : post
-        )
-      );
+        const newLikedPosts = new Set(likedPosts);
+        newLikedPosts.delete(postId);
+        setLikedPosts(newLikedPosts);
+        localStorage.setItem("likedPosts", JSON.stringify([...newLikedPosts]));
+
+        setPosts(
+          posts.map((post) =>
+            post.id === postId ? { ...post, likes: post.likes - 1 } : post
+          )
+        );
+      } else {
+        // 좋아요 추가
+        await updateDoc(postRef, {
+          likes: increment(1),
+        });
+
+        const newLikedPosts = new Set(likedPosts);
+        newLikedPosts.add(postId);
+        setLikedPosts(newLikedPosts);
+        localStorage.setItem("likedPosts", JSON.stringify([...newLikedPosts]));
+
+        setPosts(
+          posts.map((post) =>
+            post.id === postId ? { ...post, likes: post.likes + 1 } : post
+          )
+        );
+      }
     } catch (error) {
       console.error("좋아요 처리 실패:", error);
     }
@@ -194,6 +215,159 @@ const ConvenienceFoodCommunity = () => {
     return `${year}.${month}.${day} ${hours}:${minutes}`;
   };
 
+  // 게시글 삭제 함수 수정
+  const handleDelete = async (postId) => {
+    const post = posts.find((p) => p.id === postId);
+
+    if (post.author !== nickname) {
+      alert("작성자만 삭제할 수 있습니다.");
+      return;
+    }
+
+    if (!window.confirm("정말 삭제하시겠습니까?")) return;
+
+    try {
+      await deleteDoc(doc(db, "posts", postId));
+      setPosts(posts.filter((post) => post.id !== postId));
+    } catch (error) {
+      console.error("게시글 삭제 실패:", error);
+      alert("게시글 삭제에 실패했습니다.");
+    }
+  };
+
+  // 게시글 수정 시작 함수 추가
+  const handleEditStart = (postId) => {
+    const post = posts.find((p) => p.id === postId);
+
+    if (post.author !== nickname) {
+      alert("작성자만 수정할 수 있습니다.");
+      return;
+    }
+
+    setEditingPost(postId);
+  };
+
+  // 게시글 수정 함수
+  const handleEdit = async (postId, newContent) => {
+    try {
+      const postRef = doc(db, "posts", postId);
+      await updateDoc(postRef, {
+        content: newContent,
+        updatedAt: new Date().toISOString(),
+      });
+
+      setPosts(
+        posts.map((post) =>
+          post.id === postId
+            ? {
+                ...post,
+                content: newContent,
+                updatedAt: new Date().toISOString(),
+              }
+            : post
+        )
+      );
+      setEditingPost(null);
+    } catch (error) {
+      console.error("게시글 수정 실패:", error);
+      alert("게시글 수정에 실패했습니다.");
+    }
+  };
+
+  // nickname 상태 변경 부분 수정
+  const handleNicknameChange = (e) => {
+    const newNickname = e.target.value;
+    setNickname(newNickname);
+    localStorage.setItem("nickname", newNickname);
+  };
+
+  // 댓글 삭제 함수
+  const handleCommentDelete = async (postId, commentId) => {
+    const post = posts.find((p) => p.id === postId);
+
+    const comment = post.comments.find((c) => c.id === commentId);
+    if (comment.author !== nickname) {
+      alert("작성자만 삭제할 수 있습니다.");
+      return;
+    }
+
+    if (!window.confirm("댓글을 삭제하시겠습니까?")) return;
+
+    try {
+      const postRef = doc(db, "posts", postId);
+      const updatedComments = post.comments.filter((c) => c.id !== commentId);
+
+      await updateDoc(postRef, {
+        comments: updatedComments,
+      });
+
+      setPosts(
+        posts.map((p) =>
+          p.id === postId ? { ...p, comments: updatedComments } : p
+        )
+      );
+    } catch (error) {
+      console.error("댓글 삭제 실패:", error);
+      alert("댓글 삭제에 실패했습니다.");
+    }
+  };
+
+  // 댓글 수정 함수
+  const handleCommentEdit = async (postId, commentId, newContent) => {
+    const post = posts.find((p) => p.id === postId);
+
+    const comment = post.comments.find((c) => c.id === commentId);
+    if (comment.author !== nickname) {
+      alert("작성자만 수정할 수 있습니다.");
+      return;
+    }
+
+    try {
+      const postRef = doc(db, "posts", postId);
+      const updatedComments = post.comments.map((c) =>
+        c.id === commentId
+          ? {
+              ...c,
+              content: newContent,
+              updatedAt: new Date().toISOString(),
+            }
+          : c
+      );
+
+      await updateDoc(postRef, {
+        comments: updatedComments,
+      });
+
+      setPosts(
+        posts.map((p) =>
+          p.id === postId ? { ...p, comments: updatedComments } : p
+        )
+      );
+      setEditingComment(null);
+    } catch (error) {
+      console.error("댓글 수정 실패:", error);
+      alert("댓글 수정에 실패했습니다.");
+    }
+  };
+
+  // 댓글 수정 시작 함수 추가
+  const handleCommentEditStart = (comment) => {
+    if (comment.author !== nickname) {
+      alert("작성자만 수정할 수 있습니다.");
+      return;
+    }
+    setEditingComment(comment.id);
+  };
+
+  // 댓글 삭제 시작 함수 추가
+  const handleCommentDeleteStart = (postId, comment) => {
+    if (comment.author !== nickname) {
+      alert("작성자만 삭제할 수 있습니다.");
+      return;
+    }
+    handleCommentDelete(postId, comment.id);
+  };
+
   return (
     <div className="community-container max-w-4xl mx-auto p-4">
       <h2 className="text-4xl font-extrabold mb-8 text-center bg-gradient-to-r from-[#7c3aed] to-[#10b981] text-transparent bg-clip-text">
@@ -209,7 +383,7 @@ const ConvenienceFoodCommunity = () => {
           <input
             type="text"
             value={nickname}
-            onChange={(e) => setNickname(e.target.value)}
+            onChange={handleNicknameChange}
             placeholder="닉네임을 입력해주세요"
             className="w-full p-3 border rounded-lg mb-4"
             maxLength={10}
@@ -297,17 +471,63 @@ const ConvenienceFoodCommunity = () => {
         {posts.map((post) => (
           <div key={post.id} className="bg-white rounded-lg p-6 shadow-md">
             {/* 작성자 정보 */}
-            <div className="flex items-center mb-4">
+            <div className="flex items-center justify-between mb-4">
               <div>
                 <div className="font-semibold">{post.author}</div>
                 <div className="text-sm text-gray-500">
                   {formatDate(post.createdAt)}
+                  {post.updatedAt && " (수정됨)"}
                 </div>
+              </div>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => handleEditStart(post.id)}
+                  className="text-gray-500 hover:text-primary-color"
+                >
+                  ✏️ 수정
+                </button>
+                <button
+                  onClick={() => handleDelete(post.id)}
+                  className="text-gray-500 hover:text-red-500"
+                >
+                  🗑️ 삭제
+                </button>
               </div>
             </div>
 
             {/* 게시글 내용 */}
-            <p className="mb-4">{post.content}</p>
+            {editingPost === post.id ? (
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  handleEdit(post.id, e.target.content.value);
+                }}
+                className="mb-4"
+              >
+                <textarea
+                  name="content"
+                  defaultValue={post.content}
+                  className="w-full p-4 border rounded-lg mb-2"
+                />
+                <div className="flex gap-2 justify-end">
+                  <button
+                    type="button"
+                    onClick={() => setEditingPost(null)}
+                    className="px-4 py-2 text-gray-500 hover:text-gray-700"
+                  >
+                    취소
+                  </button>
+                  <button
+                    type="submit"
+                    className="px-4 py-2 text-white rounded-lg bg-[var(--primary-color)] hover:bg-[var(--primary-light)]"
+                  >
+                    수정완료
+                  </button>
+                </div>
+              </form>
+            ) : (
+              <p className="mb-4">{post.content}</p>
+            )}
 
             {/* 게시글 이미지 */}
             {post.image && (
@@ -326,10 +546,9 @@ const ConvenienceFoodCommunity = () => {
             <div className="flex items-center gap-4 mb-4">
               <button
                 onClick={() => handleLike(post.id)}
-                disabled={likedPosts.has(post.id)}
                 className={`flex items-center gap-2 ${
                   likedPosts.has(post.id)
-                    ? "text-red-500 cursor-not-allowed"
+                    ? "text-red-500"
                     : "text-gray-500 hover:text-primary-color"
                 }`}
               >
@@ -349,11 +568,65 @@ const ConvenienceFoodCommunity = () => {
                 >
                   <div className="flex justify-between items-center mb-2">
                     <span className="font-semibold">{comment.author}</span>
-                    <span className="text-sm text-gray-500">
-                      {formatDate(comment.createdAt)}
-                    </span>
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm text-gray-500">
+                        {formatDate(comment.createdAt)}
+                        {comment.updatedAt && " (수정됨)"}
+                      </span>
+                      <div className="flex gap-2">
+                        <button
+                          onClick={() => handleCommentEditStart(comment)}
+                          className="text-gray-500 hover:text-primary-color text-sm"
+                        >
+                          ✏️
+                        </button>
+                        <button
+                          onClick={() =>
+                            handleCommentDeleteStart(post.id, comment)
+                          }
+                          className="text-gray-500 hover:text-red-500 text-sm"
+                        >
+                          🗑️
+                        </button>
+                      </div>
+                    </div>
                   </div>
-                  <p className="text-sm">{comment.content}</p>
+                  {editingComment === comment.id ? (
+                    <form
+                      onSubmit={(e) => {
+                        e.preventDefault();
+                        handleCommentEdit(
+                          post.id,
+                          comment.id,
+                          e.target.content.value
+                        );
+                      }}
+                      className="mt-2"
+                    >
+                      <input
+                        name="content"
+                        defaultValue={comment.content}
+                        className="w-full px-3 py-2 border rounded-lg mb-2"
+                      />
+                      <div className="flex gap-2 justify-end">
+                        <button
+                          type="button"
+                          onClick={() => setEditingComment(null)}
+                          className="text-sm text-gray-500 hover:text-gray-700"
+                        >
+                          취소
+                        </button>
+                        <button
+                          type="submit"
+                          className="text-sm text-primary-color hover:text-primary-light"
+                        >
+                          수정완료
+                        </button>
+                      </div>
+                    </form>
+                  ) : (
+                    <p className="text-sm">{comment.content}</p>
+                  )}
                 </div>
               ))}
 
