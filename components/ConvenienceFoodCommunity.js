@@ -91,24 +91,42 @@ const ConvenienceFoodCommunity = () => {
 
   // 좋아요 처리
   const handleLike = async (postId) => {
-    if (likedPosts.has(postId)) return;
-
     try {
       const postRef = doc(db, "posts", postId);
-      await updateDoc(postRef, {
-        likes: increment(1),
-      });
 
-      const newLikedPosts = new Set(likedPosts);
-      newLikedPosts.add(postId);
-      setLikedPosts(newLikedPosts);
-      localStorage.setItem("likedPosts", JSON.stringify([...newLikedPosts]));
+      if (likedPosts.has(postId)) {
+        // 좋아요 취소
+        await updateDoc(postRef, {
+          likes: increment(-1),
+        });
 
-      setPosts(
-        posts.map((post) =>
-          post.id === postId ? { ...post, likes: post.likes + 1 } : post
-        )
-      );
+        const newLikedPosts = new Set(likedPosts);
+        newLikedPosts.delete(postId);
+        setLikedPosts(newLikedPosts);
+        localStorage.setItem("likedPosts", JSON.stringify([...newLikedPosts]));
+
+        setPosts(
+          posts.map((post) =>
+            post.id === postId ? { ...post, likes: post.likes - 1 } : post
+          )
+        );
+      } else {
+        // 좋아요 추가
+        await updateDoc(postRef, {
+          likes: increment(1),
+        });
+
+        const newLikedPosts = new Set(likedPosts);
+        newLikedPosts.add(postId);
+        setLikedPosts(newLikedPosts);
+        localStorage.setItem("likedPosts", JSON.stringify([...newLikedPosts]));
+
+        setPosts(
+          posts.map((post) =>
+            post.id === postId ? { ...post, likes: post.likes + 1 } : post
+          )
+        );
+      }
     } catch (error) {
       console.error("좋아요 처리 실패:", error);
     }
@@ -326,10 +344,9 @@ const ConvenienceFoodCommunity = () => {
             <div className="flex items-center gap-4 mb-4">
               <button
                 onClick={() => handleLike(post.id)}
-                disabled={likedPosts.has(post.id)}
                 className={`flex items-center gap-2 ${
                   likedPosts.has(post.id)
-                    ? "text-red-500 cursor-not-allowed"
+                    ? "text-red-500"
                     : "text-gray-500 hover:text-primary-color"
                 }`}
               >
