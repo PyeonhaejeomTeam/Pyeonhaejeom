@@ -98,7 +98,7 @@ body {
 }
 
 .header_title {
-  font-size: 2.5rem;
+  font-size: 3rem;
   font-weight: 800;
   text-decoration: none;
   background: linear-gradient(
@@ -503,7 +503,7 @@ body {
   }
 
   .header_title {
-    font-size: 2rem;
+    font-size: 2.5rem;
   }
 
   .menu_container {

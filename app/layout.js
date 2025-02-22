@@ -105,7 +105,8 @@ export default function RootLayout({ children }) {
         />
 
         {/* Favicon */}
-        <link rel="icon" href="/app/assets/image/sky.ico" />
+        <link rel="icon" href="/" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/creat8-2c.png" />
         <link rel="manifest" href="/manifest.json" />
       </head>
       <body>
