@@ -3,9 +3,18 @@
 @tailwind utilities;
 
 :root {
-  --primary-color: #7c3aed;
+  /* 시그니처 컬러 */
   --primary-light: #9f67ff;
   --secondary-color: #10b981;
+  
+  /* 시그니처 그라데이션 컬러 */
+  --signature-gradient: linear-gradient(
+  to right,
+  var(--primary-color),
+  var(--secondary-color)
+  );
+  
+  --primary-color: #7c3aed;
   --background-color: #f9fafb;
   --text-color: #1f2937;
   --gray-light: #f3f4f6;
