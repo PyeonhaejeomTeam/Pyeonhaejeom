@@ -182,6 +182,18 @@ const ConvenienceFoodCommunity = () => {
     }
   };
 
+  // 날짜 포맷팅 함수 추가
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    const hours = String(date.getHours()).padStart(2, "0");
+    const minutes = String(date.getMinutes()).padStart(2, "0");
+
+    return `${year}.${month}.${day} ${hours}:${minutes}`;
+  };
+
   return (
     <div className="community-container max-w-4xl mx-auto p-4">
       <h2 className="text-4xl font-extrabold mb-8 text-center bg-gradient-to-r from-[#7c3aed] to-[#10b981] text-transparent bg-clip-text">
@@ -289,7 +301,7 @@ const ConvenienceFoodCommunity = () => {
               <div>
                 <div className="font-semibold">{post.author}</div>
                 <div className="text-sm text-gray-500">
-                  {new Date(post.createdAt).toLocaleDateString()}
+                  {formatDate(post.createdAt)}
                 </div>
               </div>
             </div>
@@ -338,7 +350,7 @@ const ConvenienceFoodCommunity = () => {
                   <div className="flex justify-between items-center mb-2">
                     <span className="font-semibold">{comment.author}</span>
                     <span className="text-sm text-gray-500">
-                      {new Date(comment.createdAt).toLocaleDateString()}
+                      {formatDate(comment.createdAt)}
                     </span>
                   </div>
                   <p className="text-sm">{comment.content}</p>
