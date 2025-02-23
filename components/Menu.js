@@ -14,13 +14,14 @@ export default function Menu() {
       >
         홈
       </Link>
+
       <Link
-        href="/game"
+        href="/community"
         className={`menu_link ${
-          pathname === "/game" ? "menu_link_active" : ""
+          pathname === "/community" ? "menu_link_active" : ""
         }`}
       >
-        심리 테스트
+        커뮤니티
       </Link>
       <Link
         href="/roulette"
@@ -29,14 +30,6 @@ export default function Menu() {
         }`}
       >
         룰렛
-      </Link>
-      <Link
-        href="/community"
-        className={`menu_link ${
-          pathname === "/community" ? "menu_link_active" : ""
-        }`}
-      >
-        커뮤니티
       </Link>
       <div className="relative group">
         <Link
