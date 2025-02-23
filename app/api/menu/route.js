@@ -5,8 +5,8 @@ export async function GET() {
     { name: "컵라면", description: "따뜻한 국물" },
     { name: "샌드위치", description: "신선한 간식" },
     { name: "김밥", description: "영양만점 식사" },
-    { name: "버거", description: "든든한 간식" }
+    { name: "버거", description: "든든한 간식" },
   ];
 
   return Response.json({ menuItems });
-} 
+}

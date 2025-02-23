@@ -1,4 +1,4 @@
-import { personalities } from "@/app/assets/data/personalities";
+import { personalities } from "@/assets/data/personalities";
 
 export async function GET() {
   const personalities = {
