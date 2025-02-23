@@ -26,17 +26,19 @@ export default function RoulettePageContent({ menuItems = [] }) {
 
       <div className="roulette_main">
         <Roulette items={menuItems} onComplete={handleRouletteComplete} />
-        
+
         {selectedMenu && (
           <div className="selected_menu">
             <h2 className="selected_menu_title">추천 메뉴</h2>
             <div className="selected_menu_card">
               <h3 className="selected_menu_name">{selectedMenu.name}</h3>
-              <p className="selected_menu_description">{selectedMenu.description}</p>
+              <p className="selected_menu_description">
+                {selectedMenu.description}
+              </p>
             </div>
           </div>
         )}
       </div>
     </div>
   );
-} 
+}
