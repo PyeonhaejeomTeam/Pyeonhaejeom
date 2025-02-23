@@ -33,6 +33,7 @@ export default function RootLayout({ children }) {
           name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1"
         />
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="author" content="편해점" />
         <meta name="category" content="entertainment" />
         <meta name="format-detection" content="telephone=no" />
