@@ -4,15 +4,12 @@ import Footer from "@/components/Footer";
 import Menu from "@/components/Menu";
 
 export const metadata = {
-  title: '편해점',
-  description: 'CU 편의점 제품 추천 서비스',
+  title: "편해점",
+  description: "CU 편의점 제품 추천 서비스",
   icons: {
-    icon: [
-      { url: '/favicon.ico' },
-      { url: '/icon.png', type: 'image/png' },
-    ],
-    shortcut: '/favicon.ico',
-    apple: '/apple-icon.png',
+    icon: [{ url: "/favicon.ico" }, { url: "/icon.png", type: "image/png" }],
+    shortcut: "/favicon.ico",
+    apple: "/apple-icon.png",
   },
   keywords: [
     "편의점",
@@ -98,9 +95,7 @@ export default function RootLayout({ children }) {
       <body>
         <Header />
         <Menu />
-        <main className="min-h-screen pt-6">
-          {children}
-        </main>
+        <main className="main">{children}</main>
         <Footer />
       </body>
     </html>

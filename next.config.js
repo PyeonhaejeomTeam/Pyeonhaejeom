@@ -2,8 +2,9 @@
 const nextConfig = {
   images: {
     domains: [
-      'tqklhszfkvzk6518638.edge.naverncp.com',
-      'cdn2.bgfretail.com'
+      "tqklhszfkvzk6518638.edge.naverncp.com",
+      "cdn2.bgfretail.com",
+      "res.cloudinary.com",
     ],
   },
   async headers() {
