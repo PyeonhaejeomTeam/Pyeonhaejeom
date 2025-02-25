@@ -4,9 +4,16 @@ import Footer from "@/components/Footer";
 import Menu from "@/components/Menu";
 
 export const metadata = {
-  title: "편해점 - 당신의 편의점 성향 테스트",
-  description:
-    "당신의 편의점 음식 취향으로 알아보는 성향 테스트! 나와 잘 맞는 편의점 음식 조합을 찾아보세요.",
+  title: '편해점',
+  description: 'CU 편의점 제품 추천 서비스',
+  icons: {
+    icon: [
+      { url: '/favicon.ico' },
+      { url: '/icon.png', type: 'image/png' },
+    ],
+    shortcut: '/favicon.ico',
+    apple: '/apple-icon.png',
+  },
   keywords: [
     "편의점",
     "편의점 음식",
@@ -27,6 +34,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="ko">
       <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/icon.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/apple-icon.png" />
         {/* 기본 메타 태그 */}
         <meta charSet="utf-8" />
         <meta
@@ -83,14 +93,13 @@ export default function RootLayout({ children }) {
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
         />
-        <link rel="apple-touch-icon" sizes="180x180" href="/creat8-2c.png" />
         <link rel="manifest" href="/manifest.json" />
       </head>
       <body>
         <Header />
         <Menu />
-        <main className="main" style={{ height: "auto" }}>
-          <div className="container">{children}</div>
+        <main className="min-h-screen pt-6">
+          {children}
         </main>
         <Footer />
       </body>

@@ -14,8 +14,8 @@
     var(--secondary-color)
   );
 
-  --primary-color: #7c3aed;
-  --background-color: #f9fafb;
+  --primary-color: #6366F1;
+  --background-color: #F8F9FF;
   --text-color: #1f2937;
   --gray-light: #f3f4f6;
   --gray-medium: #9ca3af;
@@ -51,12 +51,12 @@ body {
   max-width: 100vw;
   overflow-x: hidden;
   height: 100%;
+  background-color: var(--background-color);
 }
 
 body {
   font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui,
     Roboto, sans-serif;
-  background-color: var(--background-color);
   color: var(--text-color);
   line-height: 1.6;
   display: flex;
@@ -892,4 +892,40 @@ body {
 .share_section {
   margin-top: 3rem;
   text-align: center;
+}
+
+.question-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.question-number {
+  @apply text-[#6366F1] text-xl font-medium mb-8;
+}
+
+.question-title {
+  @apply text-[#6366F1] text-3xl font-bold text-center mb-16;
+}
+
+.options-container {
+  @apply w-full max-w-xl space-y-4;
+}
+
+.option-button {
+  width: 100%;
+  padding: 1rem;
+  background: white;
+  border: 2px solid #e5e7eb;
+  border-radius: 0.5rem;
+  text-align: left;
+  transition: all 0.2s;
+}
+
+.option-button:hover {
+  border-color: var(--primary-color);
+}
+
+.question-button {
+  @apply w-full p-6 text-left bg-white rounded-2xl shadow-sm hover:shadow-md transition-all;
 }

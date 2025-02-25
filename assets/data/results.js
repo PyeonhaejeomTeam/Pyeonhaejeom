@@ -1,29 +1,37 @@
 export const results = {
-  meal_lover: {
-    title: "든든한 한 끼 추구러 🍱",
-    description: "당신은 확실한 한 끼를 중요하게 생각하는 실용주의자!\n든든한 식사로 하루를 완성하는 당신을 위한 추천 메뉴를 준비했어요.",
+  "든든한 한식파": {
+    title: "든든한 한식파 🍱",
+    description: "한식을 선호하며 든든한 한 끼를 중요하게 생각하시는군요!",
     recommendations: [
       {
-        name: "도시락 + 컵라면",
-        description: "든든함 200%! 영양만점 조합"
+        name: "도)한끼만족불백한상",
+        price: "5,200원",
+        imageUrl: "//tqklhszfkvzk6518638.edge.naverncp.com/product/8800271901752.png",
+        description: "든든한 불고기 도시락"
       },
       {
-        name: "삼각김밥 + 샐러드",
-        description: "건강과 포만감을 동시에"
+        name: "도)한끼만족제육한상",
+        price: "5,200원",
+        imageUrl: "//tqklhszfkvzk6518638.edge.naverncp.com/product/8809196619810.jpg",
+        description: "매콤한 제육 도시락"
       }
     ]
   },
-  snack_lover: {
-    title: "달콤 짭짤 간식러 🍪",
-    description: "당신은 다양한 맛을 즐기는 미식가!\n스트레스도 달콤하게 날려버리는 당신을 위한 추천 조합이에요.",
+  "간편식 러버": {
+    title: "간편식 러버 🥪",
+    description: "빠르고 간편한 식사를 선호하시는군요!",
     recommendations: [
       {
-        name: "초코과자 + 아이스크림",
-        description: "달콤 시원한 환상의 조합"
+        name: "샌)GET그린카야샌드",
+        price: "2,800원",
+        imageUrl: "//tqklhszfkvzk6518638.edge.naverncp.com/product/8809895796294.jpg",
+        description: "신선한 샌드위치"
       },
       {
-        name: "감자칩 + 탄산음료",
-        description: "짭짤함과 청량감의 만남"
+        name: "햄)압도적뉴불새버거",
+        price: "4,500원",
+        imageUrl: "//tqklhszfkvzk6518638.edge.naverncp.com/product/8800279672890.jpg",
+        description: "든든한 햄버거"
       }
     ]
   },
