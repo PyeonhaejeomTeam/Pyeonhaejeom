@@ -1,7 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["res.cloudinary.com"],
+    domains: [
+      'tqklhszfkvzk6518638.edge.naverncp.com',
+      'cdn2.bgfretail.com'
+    ],
   },
   async headers() {
     return [

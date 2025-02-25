@@ -1,48 +1,31 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { useSearchParams } from "next/navigation";
-import ResultContent from "@/components/ResultContent";
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import ResultPage from '@/components/ResultPage';
 
 export default function Result() {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const searchParams = useSearchParams();
-  const type = searchParams.get("type");
+  const [answers, setAnswers] = useState(null);
+  const router = useRouter();
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        const [resultRes, personalityRes, menuRes] = await Promise.all([
-          fetch(`/api/results?type=${type}`),
-          fetch(`/api/personalities`),
-          fetch(`/api/menu`),
-        ]);
-
-        const resultData = await resultRes.json();
-        const personalityData = await personalityRes.json();
-        const menuData = await menuRes.json();
-
-        setData({
-          result: resultData.result,
-          personality: personalityData.personalities[type],
-          menuItems: menuData.menuItems,
-        });
-      } catch (error) {
-        console.error("데이터를 불러오는데 실패했습니다:", error);
-      } finally {
-        setLoading(false);
-      }
+    // 로컬 스토리지에서 답변 가져오기
+    const savedAnswers = localStorage.getItem('surveyAnswers');
+    if (!savedAnswers) {
+      router.push('/'); // 답변이 없으면 홈으로 이동
+      return;
     }
+    setAnswers(JSON.parse(savedAnswers));
+  }, [router]);
 
-    if (type) {
-      fetchData();
-    }
-  }, [type]);
+  if (!answers) {
+    return (
+      <div className="min-h-screen bg-[#F8F9FF] flex flex-col items-center justify-center">
+        <div className="text-2xl text-[#6366F1] font-bold mb-4">결과를 분석중...</div>
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#6366F1]"></div>
+      </div>
+    );
+  }
 
-  if (loading) return <div className="loading">결과를 분석중...</div>;
-  if (!data)
-    return <div className="loading">데이터를 불러오는데 실패했습니다</div>;
-
-  return <ResultContent {...data} />;
+  return <ResultPage answers={answers} />;
 }
