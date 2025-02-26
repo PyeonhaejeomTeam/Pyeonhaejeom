@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Roulette from "@/components/Roulette";
-import ShareButtons from "@/components/ShareButtons";
+import ShareButtons from "@/components/result/ShareButtons";
 import Image from "next/image";
 import { calculateResult } from "@/utils/calculateResult";
 

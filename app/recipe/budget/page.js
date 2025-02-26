@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import RecipeCard from "@/components/RecipeCard";
+import RecipeCard from "@/components/recipe/RecipeCard";
 
 export default function BudgetRecipePage() {
   const [recipes, setRecipes] = useState([]);

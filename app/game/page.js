@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import questions from "@/questions"; // 우리가 만든 questions.js 파일 import
-import QuestionPage from "@/components/QuestionPage";
+import QuestionPage from "@/components/testQuestion/QuestionPage";
 
 export default function Game() {
   return (

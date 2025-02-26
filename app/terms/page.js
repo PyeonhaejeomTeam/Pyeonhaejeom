@@ -1,4 +1,4 @@
-import TermsContent from "@/components/TermsContent";
+import TermsContent from "@/components/privacy/TermsContent";
 
 export default function Terms() {
   return <TermsContent />;

@@ -6,60 +6,86 @@ import { usePathname } from "next/navigation";
 export default function Menu() {
   const pathname = usePathname();
 
+  const recipeCategories = [
+    {
+      title: "🔥 신규 레시피",
+      link: "/recipe/new",
+    },
+    {
+      title: "🌟 인기 레시피",
+      link: "/recipe/popular",
+    },
+    {
+      title: "🤫 직원들의 비밀 레시피",
+      link: "/recipe/secret",
+    },
+    {
+      title: "💰 1000원의 행복",
+      link: "/recipe/budget",
+    },
+  ];
+
   return (
-    <nav className="bg-white shadow-md">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="flex justify-center space-x-8">
-          <Link
-            href="/"
-            className={`py-4 px-3 text-gray-700 hover:text-purple-600 ${
-              pathname === "/" ? "text-purple-600 border-b-2 border-purple-600" : ""
-            }`}
-          >
-            홈
-          </Link>
-          <Link
-            href="/community"
-            className={`py-4 px-3 text-gray-700 hover:text-purple-600 ${
-              pathname === "/community" ? "text-purple-600 border-b-2 border-purple-600" : ""
-            }`}
-          >
-            커뮤니티
-          </Link>
-          <Link
-            href="/roulette"
-            className={`py-4 px-3 text-gray-700 hover:text-purple-600 ${
-              pathname === "/roulette" ? "text-purple-600 border-b-2 border-purple-600" : ""
-            }`}
-          >
-            룰렛
-          </Link>
-          <Link
-            href="/test"
-            className={`py-4 px-3 text-gray-700 hover:text-purple-600 ${
-              pathname === "/test" ? "text-purple-600 border-b-2 border-purple-600" : ""
-            }`}
-          >
-            테스트
-          </Link>
-          <Link
-            href="/recipe"
-            className={`py-4 px-3 text-gray-700 hover:text-purple-600 ${
-              pathname === "/recipe" ? "text-purple-600 border-b-2 border-purple-600" : ""
-            }`}
-          >
-            레시피
-          </Link>
-          <Link
-            href="/challenge"
-            className={`py-4 px-3 text-gray-700 hover:text-purple-600 ${
-              pathname === "/challenge" ? "text-purple-600 border-b-2 border-purple-600" : ""
-            }`}
-          >
-            챌린지
-          </Link>
+    <nav className="menu_container">
+      <Link
+        href="/"
+        className={`menu_link ${pathname === "/" ? "menu_link_active" : ""}`}
+      >
+        홈
+      </Link>
+      <Link
+        href="/community"
+        className={`menu_link ${
+          pathname === "/community" ? "menu_link_active" : ""
+        }`}
+      >
+        커뮤니티
+      </Link>
+      <Link
+        href="/roulette"
+        className={`menu_link ${
+          pathname === "/roulette" ? "menu_link_active" : ""
+        }`}
+      >
+        룰렛
+      </Link>
+      <Link
+        href="/test"
+        className={`menu_link ${
+          pathname === "/test" ? "menu_link_active" : ""
+        }`}
+      >
+        테스트
+      </Link>
+      <div className="menu_dropdown">
+        <Link
+          href="/recipe"
+          className={`menu_link ${
+            pathname.startsWith("/recipe") ? "menu_link_active" : ""
+          }`}
+        >
+          레시피
+        </Link>
+        <div className="menu_dropdown_content">
+          {recipeCategories.map((category, index) => (
+            <Link
+              key={index}
+              href={category.link}
+              className="menu_dropdown_item"
+            >
+              {category.title}
+            </Link>
+          ))}
         </div>
       </div>
+      <Link
+        href="/challenge"
+        className={`menu_link ${
+          pathname === "/challenge" ? "menu_link_active" : ""
+        }`}
+      >
+        챌린지
+      </Link>
     </nav>
   );
 }

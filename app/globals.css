@@ -175,6 +175,46 @@ body {
   border-radius: 2px;
 }
 
+/* 드롭다운 메뉴 스타일 */
+.menu_dropdown {
+  position: relative;
+}
+
+.menu_dropdown_content {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 220px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: var(--shadow-lg);
+  z-index: 50;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+}
+
+.menu_dropdown:hover .menu_dropdown_content {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.menu_dropdown_item {
+  display: block;
+  padding: 0.75rem 1.5rem;
+  color: var(--text-color);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.menu_dropdown_item:hover {
+  background-color: var(--gray-light);
+  color: var(--primary-color);
+}
+
 /* Footer 스타일 */
 .footer {
   flex-shrink: 0;
