@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import ResultContent from "@/components/ResultContent";
+import ResultContent from "@/components/result/ResultContent";
 
 export default function Result() {
   const [answers, setAnswers] = useState(null);
