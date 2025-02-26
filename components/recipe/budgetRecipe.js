@@ -1,13 +1,26 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
+import Image from "next/image";
 
-export default function RecipeCard({ title, ingredients, steps, totalPrice, time, difficulty }) {
+export default function RecipeCard({
+  title,
+  ingredients,
+  steps,
+  totalPrice,
+  time,
+  difficulty,
+  imageUrl,
+}) {
+  // 이미지 URL이 '//'로 시작하면 'https:'를 추가
+  const processedImageUrl = imageUrl?.startsWith("//")
+    ? `https:${imageUrl}`
+    : imageUrl || "/images/default-recipe.jpg";
+
   return (
     <div className="bg-white rounded-lg shadow-lg overflow-hidden">
       <div className="relative h-48 w-full">
         <Image
-          src={'/default-recipe.jpg'}
+          src={processedImageUrl}
           alt={title}
           fill
           className="object-cover"
@@ -39,4 +52,4 @@ export default function RecipeCard({ title, ingredients, steps, totalPrice, time
       </div>
     </div>
   );
-} 
+}
