@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect } from 'react';
-import Roulette from '@/components/Roulette';
-import Image from 'next/image';
+import { useState, useEffect } from "react";
+import Roulette from "@/components/RouletteContent";
+import Image from "next/image";
 
 export default function RoulettePage() {
   const [products, setProducts] = useState([]);
@@ -12,15 +12,15 @@ export default function RoulettePage() {
   useEffect(() => {
     async function fetchProducts() {
       try {
-        const response = await fetch('/api/products');
+        const response = await fetch("/api/products");
         const allProducts = await response.json();
-        
+
         // 24개의 랜덤 제품 선택
         const shuffled = allProducts.sort(() => 0.5 - Math.random());
         setProducts(shuffled.slice(0, 24));
         setLoading(false);
       } catch (error) {
-        console.error('Error fetching products:', error);
+        console.error("Error fetching products:", error);
         setLoading(false);
       }
     }
@@ -35,7 +35,9 @@ export default function RoulettePage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-[#F8F9FF] flex flex-col items-center justify-center">
-        <div className="text-2xl text-[#6366F1] font-bold mb-4">룰렛 준비중...</div>
+        <div className="text-2xl text-[#6366F1] font-bold mb-4">
+          룰렛 준비중...
+        </div>
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#6366F1]"></div>
       </div>
     );
@@ -47,10 +49,10 @@ export default function RoulettePage() {
         <h1 className="text-3xl font-bold text-center text-[#6366F1] mb-12">
           오늘의 랜덤 메뉴 룰렛
         </h1>
-        
+
         <div className="flex flex-col items-center">
           <Roulette items={products} onComplete={handleRouletteComplete} />
-          
+
           {selectedProduct && (
             <div className="mt-16 w-full max-w-md bg-white rounded-3xl shadow-lg p-8 relative z-10">
               <h2 className="text-2xl font-bold text-center text-[#6366F1] mb-6">

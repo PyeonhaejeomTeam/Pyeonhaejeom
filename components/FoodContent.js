@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 
-export default function FoodCard({ name, price, description, imageUrl, rating }) {
+export default function FoodContent({ name, price, description, imageUrl, rating }) {
   return (
     <div className="bg-white rounded-lg shadow-lg overflow-hidden">
       <div className="relative h-48 w-full">

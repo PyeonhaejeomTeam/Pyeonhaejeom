@@ -1,4 +1,4 @@
-import { questions } from "@/assets/data/questions";
+import { questions } from "@/assets/data/questionsData";
 
 export async function GET() {
   const questions = [

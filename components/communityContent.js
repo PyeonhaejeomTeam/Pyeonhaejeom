@@ -19,7 +19,7 @@ import {
 } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
-const ConvenienceFoodCommunity = () => {
+export default function communityContent() {
   const [posts, setPosts] = useState([]);
   const [nickname, setNickname] = useState(() => {
     if (typeof window !== "undefined") {
@@ -659,6 +659,5 @@ const ConvenienceFoodCommunity = () => {
       </div>
     </div>
   );
-};
+}
 
-export default ConvenienceFoodCommunity;

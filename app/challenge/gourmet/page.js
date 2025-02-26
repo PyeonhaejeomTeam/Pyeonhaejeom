@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import RecipeCard from "@/components/recipe/RecipeCard";
+import RecipeCard from "@/components/recipe/budgetRecipe";
 
 export default function GourmetChallengePage() {
   const [recipes, setRecipes] = useState([]);
