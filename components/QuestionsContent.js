@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import questions from "@/questions";
+import questions from "@/assets/data/questionsData";
 
-export default function QuestionPage() {
+export default function QuestionsContent() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState([]);
   const router = useRouter();
@@ -14,30 +14,30 @@ export default function QuestionPage() {
     setAnswers(newAnswers);
 
     if (currentQuestion < questions.length - 1) {
-      setCurrentQuestion(prev => prev + 1);
+      setCurrentQuestion((prev) => prev + 1);
     } else {
-      // 모든 답변을 로컬 스토리지에 저장
-      localStorage.setItem('surveyAnswers', JSON.stringify(newAnswers));
-      // 결과 페이지로 이동
-      router.push('/result');
+      localStorage.setItem("surveyAnswers", JSON.stringify(newAnswers));
+      router.push("/result");
     }
   };
 
+  const currentQuestionData = questions[currentQuestion];
+
   return (
     <div className="min-h-screen bg-[#F8F9FF] flex flex-col items-center justify-center px-4">
-      {/* 질문 번호 */}
+      {/* 진행 상태 표시 */}
       <div className="text-[#6366F1] text-xl font-medium mb-16">
-        {currentQuestion + 1} / 10
+        {currentQuestion + 1} / {questions.length}
       </div>
-      
+
       {/* 질문 제목 */}
-      <h2 className="text-[#6366F1] text-3xl font-bold text-center mb-20">
-        {questions[currentQuestion].question}
+      <h2 className="text-3xl font-extrabold text-center bg-gradient-to-r from-[#7c3aed] to-[#10b981] text-transparent bg-clip-text mb-20">
+        {currentQuestionData.question}
       </h2>
 
       {/* 선택지 */}
       <div className="w-full max-w-xl space-y-6">
-        {questions[currentQuestion].options.map((option, index) => (
+        {currentQuestionData.options.map((option, index) => (
           <button
             key={index}
             className="w-full p-8 text-xl text-left bg-white rounded-3xl shadow-sm hover:shadow-md transition-all"
@@ -49,4 +49,4 @@ export default function QuestionPage() {
       </div>
     </div>
   );
-} 
+}

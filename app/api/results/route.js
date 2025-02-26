@@ -1,4 +1,4 @@
-import { results } from "@/assets/data/results";
+import { results } from "@/assets/data/resultsData";
 
 export async function GET(request) {
   const { searchParams } = new URL(request.url);

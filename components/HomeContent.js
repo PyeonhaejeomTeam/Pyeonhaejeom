@@ -11,7 +11,7 @@ export default function HomeContent() {
         나의 음식 취향 성향 테스트
       </h1>
       <p className="home_description">당신의 편의점 음식 취향을 알아보세요!</p>
-      <Link href="/game" className="button">
+      <Link href="/test" className="button">
         👉 1분만에 알아보기
       </Link>
     </div>

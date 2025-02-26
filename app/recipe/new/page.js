@@ -2,12 +2,12 @@
 
 import { useState, useEffect } from "react";
 import RecipeCard from "@/components/recipe/budgetRecipe";
-import BudgetRecipe from "@/components/recipe/budgetRecipe";
+import NewRecipe from "@/components/recipe/newRecipe";
 
-export default function BudgetRecipePage() {
+export default function NewRecipePage() {
   return (
     <div className="recipe-page">
-      <BudgetRecipe />
+      <NewRecipe />
     </div>
   );
 }

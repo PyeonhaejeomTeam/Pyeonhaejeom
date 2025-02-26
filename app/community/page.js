@@ -1,6 +1,6 @@
 "use client";
 
-import ConvenienceFoodCommunity from "@/components/community/ConvenienceFoodCommunity";
+import ConvenienceFoodCommunity from "@/components/communityContent";
 
 export default function CommunityPage() {
   return (

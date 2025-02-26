@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import FoodCard from "@/components/FoodCard";
+import FoodCard from "@/components/FoodContent";
 
 export default function TimeChallengePage() {
   const [timeLeft, setTimeLeft] = useState(180); // 3분 = 180초

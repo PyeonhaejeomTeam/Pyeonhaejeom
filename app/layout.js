@@ -1,7 +1,7 @@
 import "./globals.css";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import Menu from "@/components/Menu";
+import Header from "@/components/HeaderContent";
+import Footer from "@/components/FooterContent";
+import Menu from "@/components/MenuContent";
 
 export const metadata = {
   title: "편해점",

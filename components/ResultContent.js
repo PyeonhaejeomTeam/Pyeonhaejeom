@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import Roulette from "@/components/Roulette";
-import ShareButtons from "@/components/result/ShareButtons";
+import Roulette from "@/components/RouletteContent";
+import ShareButtons from "@/components/ShareButtons";
 import Image from "next/image";
 import { calculateResult } from "@/utils/calculateResult";
 

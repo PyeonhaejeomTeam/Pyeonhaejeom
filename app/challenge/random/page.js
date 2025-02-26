@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import FoodCard from "@/components/FoodCard";
+import FoodCard from "@/components/FoodContent";
 
 export default function RandomChallengePage() {
   const [randomFood, setRandomFood] = useState(null);

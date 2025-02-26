@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export default function Menu() {
+export default function MenuContent() {
   const pathname = usePathname();
 
   const recipeCategories = [

@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export default function Header() {
+export default function HeaderContent() {
   return (
     <header className="header">
       <div className="header_container">
