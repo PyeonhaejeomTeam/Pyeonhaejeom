@@ -7,9 +7,8 @@ export const metadata = {
   title: "편해점",
   description: "CU 편의점 제품 추천 서비스",
   icons: {
-    icon: [{ url: "/favicon.ico" }, { url: "/icon.png", type: "image/png" }],
-    shortcut: "/favicon.ico",
-    apple: "/apple-icon.png",
+    icon: "/favicon.png",
+    apple: "/favicon.png",
   },
   keywords: [
     "편의점",
@@ -31,9 +30,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="ko">
       <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="icon" href="/icon.png" type="image/png" />
-        <link rel="apple-touch-icon" href="/apple-icon.png" />
         {/* 기본 메타 태그 */}
         <meta charSet="utf-8" />
         <meta
