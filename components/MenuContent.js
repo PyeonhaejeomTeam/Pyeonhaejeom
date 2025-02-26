@@ -57,7 +57,7 @@ export default function MenuContent() {
       >
         테스트
       </Link>
-      <div className="menu_dropdown">
+      {/* <div className="menu_dropdown">
         <Link
           href="/recipe"
           className={`menu_link ${
@@ -77,15 +77,15 @@ export default function MenuContent() {
             </Link>
           ))}
         </div>
-      </div>
-      <Link
+      </div> */}
+      {/* <Link
         href="/challenge"
         className={`menu_link ${
           pathname === "/challenge" ? "menu_link_active" : ""
         }`}
       >
         챌린지
-      </Link>
+      </Link> */}
     </nav>
   );
 }
