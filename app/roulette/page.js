@@ -12,8 +12,49 @@ export default function RoulettePage() {
   useEffect(() => {
     async function fetchProducts() {
       try {
-        const response = await fetch("/api/products");
-        const allProducts = await response.json();
+        const response = await fetch("/cuData.csv");
+        const csvText = await response.text();
+
+        // CSV 텍스트를 파싱 (쉼표가 포함된 필드 처리)
+        const parseCSVLine = (line) => {
+          const values = [];
+          let value = "";
+          let withinQuotes = false;
+
+          for (let char of line) {
+            if (char === '"') {
+              withinQuotes = !withinQuotes;
+            } else if (char === "," && !withinQuotes) {
+              values.push(value.trim());
+              value = "";
+            } else {
+              value += char;
+            }
+          }
+          values.push(value.trim());
+          return values;
+        };
+
+        const rows = csvText
+          .split("\n")
+          .map((row) => row.trim())
+          .filter((row) => row.length > 0);
+
+        const headers = parseCSVLine(rows[0]);
+        const allProducts = rows.slice(1).map((row) => {
+          const values = parseCSVLine(row);
+          const product = {};
+          headers.forEach((header, index) => {
+            // 따옴표 제거 및 특수 문자 처리
+            let value = values[index] || "";
+            value = value.replace(/^["']|["']$/g, ""); // 앞뒤 따옴표 제거
+            product[header.replace(/^["']|["']$/g, "")] = value;
+          });
+          return product;
+        });
+
+        // 디버깅을 위한 로그
+        console.log("Parsed products:", allProducts[0]);
 
         // 24개의 랜덤 제품 선택
         const shuffled = allProducts.sort(() => 0.5 - Math.random());
