@@ -6,6 +6,7 @@ const nextConfig = {
       "cdn2.bgfretail.com",
       "res.cloudinary.com",
     ],
+    unoptimized: true,
   },
   async headers() {
     return [
@@ -19,6 +20,13 @@ const nextConfig = {
         ],
       },
     ];
+  },
+  webpack: (config) => {
+    config.module.rules.push({
+      test: /\.(png|jpe?g|gif|svg)$/i,
+      type: "asset/resource",
+    });
+    return config;
   },
 };
 
