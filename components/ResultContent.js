@@ -78,8 +78,32 @@ export default function ResultContent({ answers }) {
 
         // 제품 추천 결과 가져오기
         console.log("Fetching products...");
-        const response = await fetch("/api/products");
-        const products = await response.json();
+        const response = await fetch("/cuData.csv");
+        const csvText = await response.text();
+
+        // CSV 파싱
+        const rows = csvText.split("\n");
+        const headers = rows[0].split(",").map((h) => h.trim());
+        const products = rows
+          .slice(1)
+          .map((row) => {
+            // 쌍따옴표로 묶인 필드 처리를 위한 정규식
+            const values = row.match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g) || [];
+            const product = {};
+
+            headers.forEach((header, index) => {
+              let value = values[index] || "";
+              // 쌍따옴표 제거
+              value = value.replace(/^"|"$/g, "").trim();
+              product[header] = value;
+            });
+
+            return product;
+          })
+          .filter(
+            (product) => product.상품명 && product.가격 && product.이미지URL
+          ); // 필수 필드가 있는 상품만 필터링
+
         console.log("Products received:", products);
 
         const getRecommendations = calculateResult(answers);
